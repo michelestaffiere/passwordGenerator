@@ -3,7 +3,7 @@
 /**
  * randomString()
  * returns a randomly generated string based on the params set by the passed params object
- * @param {Object} params Object consisting of rules on how to generate the string.
+ * @param {Object} params = Object consisting of rules on how to generate the string.
  * @param {Number} length  how long the randomly generated string will be.
  * @returns {string} random string.
  */
@@ -18,18 +18,18 @@ export const randomString = (params) => {
     let includeUpper = false;
     let includeLower = false;
     let includeSymbols = false;
-    let stringLength = params.Length;
+  
 
     for (const key in params) {
         if (params.hasOwnProperty(key)) {
             const value = params[key];
-            if (key === 'uppercase' && value === true) {
+            if (key === 'Uppercase' && value === true) {
                 includeUpper = true;
-            } else if (key === 'lowercase' && value === true) {
+            } else if (key === 'Lowercase' && value === true) {
                 includeLower = true;
-            } else if (key === 'numbers' && value === true) {
+            } else if (key === 'Numbers' && value === true) {
                 includeNumbers = true;
-            } else if (key === 'symbols' && value === true) {
+            } else if (key === 'Symbols' && value === true) {
                 includeSymbols = true;
             }
         }
@@ -43,10 +43,27 @@ export const randomString = (params) => {
     if (includeNumbers) possibleCharacters += nums;
     if (includeSymbols) possibleCharacters += symbols;
 
-    for (let step = 0; step < stringLength; step++) {
+    for (let step = 0; step < params.Characters; step++) {
         const randIndex = Math.floor(Math.random() * possibleCharacters.length);
         randomResult += possibleCharacters.charAt(randIndex);
     }
+    console.log(randomResult);
     return randomResult;
 };
 
+/**
+ * paramVerify
+ * @param {object} params = Object consisting of rules on how to generate the string.
+ * @return {boolean} 
+ */
+
+export const verifyParams = (params) =>{
+  let vals = Object.values(params);
+  if(vals.includes(true)){
+    console.log("has true")
+    return true;
+  }else{
+    console.log("no true")
+    return false;
+  }
+};

@@ -13,16 +13,14 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-
 function App() {
-
-  const {params, setParams} = useState({});
+  const [params, setParams] = useState({});
   return (
     <>
       <GlobalStyle />
       <div>
-        <GeneratedPassword />
-        <PasswordOptions  options={setParams}/>
+        <GeneratedPassword params={params} />
+        <PasswordOptions setParams={setParams} />
       </div>
     </>
   );
