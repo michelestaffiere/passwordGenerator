@@ -23,12 +23,21 @@ export const Span = styled.span`
 `;
 export const Text = styled.p`
   color: ${(props) =>
-    props.$highlight ? "#a4ffaf" : props.$button ? "#000000" : props.$Header ? "#817D92" : props.$SubHeader ? "#24232C" : "#e6e5ea"};
-  font-size: ${(props) => (props.$highlight ? "1.75rem" : "")};
+    props.$highlight || props.$Copy
+      ? "#a4ffaf"
+      : props.$button
+      ? "#000000"
+      : props.$Header || props.$SubHeader
+      ? "#817D92"
+      : "#e6e5ea"};
+  font-size: ${(props) =>
+    props.$highlight || props.$Password || props.$Header ? "1.75rem" : ""};
   text-shadow: ${(props) => (props.$button ? "0px 5px 5px #00000086;" : "")};
-  text-align: ${(props)=>(props.$Header ? "center" : "")};
-  margin-right:${(props)=>(props.$Indicator ? "1rem" : "")}
-  
+  text-align: ${(props) => (props.$Header ? "center" : "")};
+  margin-right: ${(props) => (props.$Indicator ? "1rem" : "")};
+  position: ${(props) => (props.$Copy ? "absolute" : "")};
+  right: 2.5rem;
+  top: -1rem;
 `;
 export const CheckInput = styled.input`
   margin-right: 1.5rem;
@@ -82,8 +91,8 @@ export const RangeSlider = styled.input`
     background: linear-gradient(
       to right,
       #a4ffaf 0%,
-      ${(props) => `#a4ffaf ${props.length * 3.33}%`},
-      ${(props) => `#18171f ${props.length * 3.33}%`},
+      ${(props) => `#a4ffaf ${props.length * 6.66}%`},
+      ${(props) => `#18171f ${props.length * 6.66}%`},
       #18171f 100%
     );
   }
@@ -93,8 +102,8 @@ export const RangeSlider = styled.input`
     background: linear-gradient(
       to right,
       #a4ffaf 0%,
-      ${(props) => `#a4ffaf ${props.length * 3.33}%`},
-      ${(props) => `#18171f ${props.length * 3.33}%`},
+      ${(props) => `#a4ffaf ${props.length * 6.66}%`},
+      ${(props) => `#18171f ${props.length * 6.66}%`},
       #18171f 100%
     );
   }
@@ -171,41 +180,51 @@ export const Indicator = styled.div`
 `;
 
 export const Bars = styled.div`
-  width: .40rem;
+  width: 0.4rem;
   height: 1.5rem;
-  margin-right:.5rem;
+  margin-right: 0.5rem;
   border: 2px solid #e6e5ea;
   background-color: ${(props) =>
-    (props.$Strength === "low" ? "#F64A4A" : props.$Strength === "medium" ? "#FB7C58" : props.$Strength === "good"  ? "#F8CD65" : props.$Strength === "high" ? "#A4FFAF":    "#18171f")};
+    props.$Strength === "low"
+      ? "#F64A4A"
+      : props.$Strength === "medium"
+      ? "#FB7C58"
+      : props.$Strength === "good"
+      ? "#F8CD65"
+      : props.$Strength === "high"
+      ? "#A4FFAF"
+      : "#18171f"};
 `;
 export const BarContainer = styled.div`
-align-items:center;
-display: flex;
-gap: 2.5px;
-`
+  align-items: center;
+  display: flex;
+  gap: 2.5px;
+`;
 export const Svg = styled.img`
-  width:100%;
-  height:auto;
-` 
+  width: 100%;
+  height: auto;
+`;
 export const SvgContainer = styled.div`
-    width:2rem;
-    height:2rem;
-    box-sizing:border-box;
-`
+  position: relative;
+  gap: 0.25rem;
+  width: 2rem;
+  height: 2rem;
+  box-sizing: border-box;
+`;
 
 export const Password = styled(Form)`
-  flex-direction:row;
-  justify-content:space-between;
-  align-items:center;
-  padding: 1rem 2rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0rem 2rem;
   margin-bottom: 1.5rem;
-  &:hover{
+  &:hover {
     cursor: pointer;
     ${Text} {
-      color:#817D92;
+      color: #817d92;
     }
-    ${Svg}{
-      filter:grayscale(1);
+    ${Svg} {
+      filter: grayscale(1);
     }
   }
-`
+`;

@@ -6,17 +6,24 @@ import PropTypes from "prop-types";
 
 const GeneratedPassword = ({params}) => {
   const [string, setString] = useState("");
+  const [isCopied,setIsCopied] = useState (false);
 
   useEffect(()=>{
-    setString(randomString(params))
+    setString(randomString(params));
+    setIsCopied(false);
   },[params])
 
+  
   return (
     <>
     <Text $Header>Password Generator</Text>
-    <Password onClick={ ()=>{ copyToClicboard(string)}}>
-      <Text>{string.length < 1 ? "P4$5W0RD" : string}</Text>
+    <Password onClick={ ()=>{ 
+      copyToClicboard(string)
+      setIsCopied(true);      
+      }}>
+      {!string ? <Text $Header>P4$5W0rD !</Text> : <Text $Password>{string}</Text>} 
       <SvgContainer>
+        {!isCopied ? "" : <Text $Copy>COPIED</Text>}
         <Svg src="../../public/assets/copy.svg" />
       </SvgContainer>
     </Password>

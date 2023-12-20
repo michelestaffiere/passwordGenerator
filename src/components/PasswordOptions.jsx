@@ -143,7 +143,7 @@ const PasswordOptions = ({ setParams }) => {
             name="range"
             type="range"
             min={0}
-            max={30}
+            max={15}
             value={paramsObj.Length}
             length={paramsObj.Length}
             onChange={handleSliderInput}
@@ -220,7 +220,6 @@ const PasswordOptions = ({ setParams }) => {
             <Bars $Strength={strength.bar4}></Bars>
           </BarContainer>
         </Indicator>
-
         <Button
           onClick={(e) => {
             handleSubmit(e);
