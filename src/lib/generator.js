@@ -23,9 +23,9 @@ export const randomString = (params) => {
     for (const key in params) {
         if (params.hasOwnProperty(key)) {
             const value = params[key];
-            if (key === 'Uppercase' && value === true) {
+            if (key === 'Upper' && value === true) {
                 includeUpper = true;
-            } else if (key === 'Lowercase' && value === true) {
+            } else if (key === 'Lower' && value === true) {
                 includeLower = true;
             } else if (key === 'Numbers' && value === true) {
                 includeNumbers = true;
@@ -43,7 +43,7 @@ export const randomString = (params) => {
     if (includeNumbers) possibleCharacters += nums;
     if (includeSymbols) possibleCharacters += symbols;
 
-    for (let step = 0; step < params.Characters; step++) {
+    for (let step = 0; step < params.Length; step++) {
         const randIndex = Math.floor(Math.random() * possibleCharacters.length);
         randomResult += possibleCharacters.charAt(randIndex);
     }
@@ -51,19 +51,3 @@ export const randomString = (params) => {
     return randomResult;
 };
 
-/**
- * paramVerify
- * @param {object} params = Object consisting of rules on how to generate the string.
- * @return {boolean} 
- */
-
-export const verifyParams = (params) =>{
-  let vals = Object.values(params);
-  if(vals.includes(true)){
-    console.log("has true")
-    return true;
-  }else{
-    console.log("no true")
-    return false;
-  }
-};

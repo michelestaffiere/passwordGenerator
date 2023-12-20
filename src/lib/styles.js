@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -13,9 +12,9 @@ export const Form = styled.form`
   font-size: 18px;
 `;
 export const Label = styled.label`
-width: ${(props) => (props.$range ? "100%" : "fit-content")};
-display: ${(props) => (props.$checkbox ? "flex" : "")};
-cursor: pointer;
+  width: ${(props) => (props.$range ? "100%" : "fit-content")};
+  display: ${(props) => (props.$checkbox ? "flex" : "")};
+  cursor: pointer;
 `;
 export const Span = styled.span`
   display: flex;
@@ -24,9 +23,12 @@ export const Span = styled.span`
 `;
 export const Text = styled.p`
   color: ${(props) =>
-    props.$highlight ? "#a4ffaf" : props.$button ? "#000000" : "#e6e5ea"};
+    props.$highlight ? "#a4ffaf" : props.$button ? "#000000" : props.$Header ? "#817D92" : props.$SubHeader ? "#24232C" : "#e6e5ea"};
   font-size: ${(props) => (props.$highlight ? "1.75rem" : "")};
   text-shadow: ${(props) => (props.$button ? "0px 5px 5px #00000086;" : "")};
+  text-align: ${(props)=>(props.$Header ? "center" : "")};
+  margin-right:${(props)=>(props.$Indicator ? "1rem" : "")}
+  
 `;
 export const CheckInput = styled.input`
   margin-right: 1.5rem;
@@ -85,7 +87,7 @@ export const RangeSlider = styled.input`
       #18171f 100%
     );
   }
-  & ::-moz-range-track {
+  &::-moz-range-track {
     -moz-appearance: none;
     height: 8px;
     background: linear-gradient(
@@ -115,15 +117,22 @@ export const RangeSlider = styled.input`
   }
   &::-moz-range-thumb {
     appearance: none;
-    height: 20px;
-    width: 20px;
+    height: 35px;
+    width: 35px;
     background-color: #e6e5ea;
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    margin-top: -5px;
+    margin-top: -15px;
+    margin-left: 5px;
+  }
+
+  &::-moz-range-thumb:hover {
+    background-color: #18171f;
+    border: 2px solid #a4ffaf;
   }
 `;
+
 export const Button = styled.button`
   width: 100%;
   background-color: #a4ffaf;
@@ -133,6 +142,7 @@ export const Button = styled.button`
   text-transform: uppercase;
   font-family: "JetBrains Mono", monospace;
   font-size: 1rem;
+  box-sizing: border-box;
   &:hover {
     background-color: #24232c;
     color: #a4ffaf;
@@ -147,5 +157,55 @@ export const Asci = styled.span`
   font-weight: 700;
   transform: scale(1.25);
 `;
+export const Indicator = styled.div`
+  width: 100%;
+  background-color: #18171f;
+  margin-top: 1.5rem;
+  padding: 0.25rem 1.75rem;
+  text-transform: uppercase;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.25rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+`;
 
-export const Indicator = styled.div``;
+export const Bars = styled.div`
+  width: .40rem;
+  height: 1.5rem;
+  margin-right:.5rem;
+  border: 2px solid #e6e5ea;
+  background-color: ${(props) =>
+    (props.$Strength === "low" ? "#F64A4A" : props.$Strength === "medium" ? "#FB7C58" : props.$Strength === "good"  ? "#F8CD65" : props.$Strength === "high" ? "#A4FFAF":    "#18171f")};
+`;
+export const BarContainer = styled.div`
+align-items:center;
+display: flex;
+gap: 2.5px;
+`
+export const Svg = styled.img`
+  width:100%;
+  height:auto;
+` 
+export const SvgContainer = styled.div`
+    width:2rem;
+    height:2rem;
+    box-sizing:border-box;
+`
+
+export const Password = styled(Form)`
+  flex-direction:row;
+  justify-content:space-between;
+  align-items:center;
+  padding: 1rem 2rem;
+  margin-bottom: 1.5rem;
+  &:hover{
+    cursor: pointer;
+    ${Text} {
+      color:#817D92;
+    }
+    ${Svg}{
+      filter:grayscale(1);
+    }
+  }
+`
