@@ -1,5 +1,7 @@
 import GeneratedPassword from "./components/GeneratedPassword";
 import PasswordOptions from "./components/PasswordOptions";
+import Credits from "./components/Credits";
+import Modal from "./components/Modal";
 import { createGlobalStyle } from "styled-components";
 import { useState } from "react";
 
@@ -21,6 +23,7 @@ function App() {
       <div>
         <GeneratedPassword params={params} />
         <PasswordOptions setParams={setParams} />
+        <Credits />
       </div>
     </>
   );

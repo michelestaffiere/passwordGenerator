@@ -39,6 +39,18 @@ export const Text = styled.p`
   right: 2.5rem;
   top: -1rem;
 `;
+
+export const Link = styled.a`
+  color: ${(props) =>
+    props.$highlight || props.$Copy
+      ? "#a4ffaf"
+      : props.$button
+      ? "#000000"
+      : props.$Header || props.$SubHeader
+      ? "#817D92"
+      : "#e6e5ea"};
+  text-decoration:none;
+`;
 export const CheckInput = styled.input`
   margin-right: 1.5rem;
   margin-bottom: 1rem;
@@ -210,6 +222,7 @@ export const SvgContainer = styled.div`
   width: 2rem;
   height: 2rem;
   box-sizing: border-box;
+  cursor: pointer;
 `;
 
 export const Password = styled(Form)`
@@ -228,3 +241,16 @@ export const Password = styled(Form)`
     }
   }
 `;
+
+export const Flex = styled(BarContainer)`
+  justify-content:${(props)=>props.$Column ? "center" : "space-between"};
+  flex-direction: ${(props)=> props.$Column ? "column" : ""};
+  align-items: ${(props) =>props.$Column ? "flex-start" : ""};
+  background-color: ${(props)=>props.$Column ? "#24232c" : ""};
+  padding:${(props)=>props.$Column ? "1rem" : ""};
+`;
+
+export const close = styled.button`
+  border: none;
+  background-image
+`
