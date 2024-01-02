@@ -47,7 +47,6 @@ export const randomString = (params) => {
         const randIndex = Math.floor(Math.random() * possibleCharacters.length);
         randomResult += possibleCharacters.charAt(randIndex);
     }
-    console.log(randomResult);
     return randomResult;
 };
 
