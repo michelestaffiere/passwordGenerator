@@ -26,8 +26,8 @@ const PasswordOptions = ({setPassword }) => {
     bar4: "",
   });
   const [paramsObj, setParamsObj] = useState({
-    Length: 0,
-    Lower: false,
+    Length: 5,
+    Lower: true,
     Upper: false,
     Numbers: false,
     Symbols: false,
