@@ -11,11 +11,13 @@ import {
   Indicator,
   Bars,
   BarContainer,
+  Flex
 } from "../lib/styles";
+import { randomString } from "../lib/generator";
 import PropTypes from "prop-types";
 
-const PasswordOptions = ({ setParams }) => {
-  const [formStatus, setFormStatus] = useState(false);
+const PasswordOptions = ({setPassword }) => {
+
   const [strength, setStrength] = useState({
     status: "Select Options",
     bar1: "",
@@ -24,12 +26,13 @@ const PasswordOptions = ({ setParams }) => {
     bar4: "",
   });
   const [paramsObj, setParamsObj] = useState({
-    Length: 5,
+    Length: 0,
     Lower: false,
     Upper: false,
     Numbers: false,
     Symbols: false,
   });
+  const [error, setError] = useState("");
 
   const handleSliderInput = (e) => {
     setParamsObj((prevState) => ({
@@ -40,17 +43,20 @@ const PasswordOptions = ({ setParams }) => {
   };
 
   const sendParams = () => {
-    setParams(paramsObj);
+    let random = randomString(paramsObj);
+    setPassword(random);
   };
 
   const validateForm = () => {
     if (Object.values(paramsObj).includes(true)) {
-      if (paramsObj.Length >= 4) {
-        setFormStatus(false);
-        return true;
+      if(paramsObj.Length === 0){
+        setError("Can't generate an empty password, please check again.")
+        return false;
       }
+      setError("");
+      return true;
     } else {
-      setFormStatus(true);
+      setError("No parameters selected, please check again.")
       return false;
     }
   };
@@ -143,7 +149,7 @@ const PasswordOptions = ({ setParams }) => {
             name="range"
             type="range"
             min={0}
-            max={15}
+            max={30}
             value={paramsObj.Length}
             length={paramsObj.Length}
             onChange={handleSliderInput}
@@ -210,15 +216,23 @@ const PasswordOptions = ({ setParams }) => {
           Include Symbols
         </Label>
 
+        {
+
+          // error messages
+          error ? <Text $Error>{error}</Text> : ""
+        }
+
         <Indicator>
           <Text $SubHeader>STRENGTH</Text>
-          <BarContainer>
+          <Flex $Indicator>
             <Text $Indicator>{strength.status}</Text>
-            <Bars $Strength={strength.bar1}></Bars>
-            <Bars $Strength={strength.bar2}></Bars>
-            <Bars $Strength={strength.bar3}></Bars>
-            <Bars $Strength={strength.bar4}></Bars>
-          </BarContainer>
+            <BarContainer>
+              <Bars $Strength={strength.bar1}></Bars>
+              <Bars $Strength={strength.bar2}></Bars>
+              <Bars $Strength={strength.bar3}></Bars>
+              <Bars $Strength={strength.bar4}></Bars>
+            </BarContainer>
+          </Flex>
         </Indicator>
         <Button
           onClick={(e) => {
@@ -237,6 +251,7 @@ const PasswordOptions = ({ setParams }) => {
 // prop validation.
 PasswordOptions.propTypes = {
   setParams: PropTypes.func, // setState function to update params state in App.jsx.
+  setPassword:PropTypes.func, // setState func for random passowrd.
 };
 
 export default PasswordOptions;

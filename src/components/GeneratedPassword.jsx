@@ -4,36 +4,43 @@ import { Svg, SvgContainer, Text, Password } from "../lib/styles";
 import { copyToClicboard } from "../lib/copyToClickboard";
 import PropTypes from "prop-types";
 
-const GeneratedPassword = ({ params }) => {
-  const [string, setString] = useState("");
+
+const wordBreak = {
+  "word-break":"break-all",
+  "max-width":"80%"
+}
+
+const GeneratedPassword = ({password}) => {
   const [isCopied, setIsCopied] = useState(false);
 
-  useEffect(() => {
-    setString(randomString(params));
+  useEffect(()=>{
     setIsCopied(false);
-  }, [params]);
+  },[password])
 
   return (
     <>
       <Text $Header>Password Generator</Text>
-      <Password
-        onClick={() => {
-          if (string === "") {
+      <Password onClick={() => {
+          if (password === "") {
             return null;
           } else {
-            copyToClicboard(string);
+            copyToClicboard(password);
             setIsCopied(true);
           }
         }}
       >
-        {!string ? (
-          <Text $Header>P4$5W0rD !</Text>
+        {!password ? (
+          <div>
+            <Text $Header>P4$5W0rD !</Text>
+          </div>
         ) : (
-          <Text $Password>{string}</Text>
+          <div style={wordBreak}>
+            <Text $Password>{password}</Text>
+          </div>
         )}
         <SvgContainer>
-          {!isCopied ? "" : <Text $Copy>COPIED</Text>}
           <Svg src="/assets/copy.svg" />
+          {!isCopied ? "" : <Text $Copy>COPIED</Text>}
         </SvgContainer>
       </Password>
     </>
@@ -42,5 +49,6 @@ const GeneratedPassword = ({ params }) => {
 
 GeneratedPassword.propTypes = {
   params: PropTypes.object,
+  password:PropTypes.string
 };
 export default GeneratedPassword;

@@ -17,13 +17,19 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
   const [params, setParams] = useState({});
+  const [password, setPassword] = useState("")
+  const [modal,setModal] = useState(false)
+
   return (
     <>
       <GlobalStyle />
       <div>
-        <GeneratedPassword params={params} />
-        <PasswordOptions setParams={setParams} />
-        <Credits />
+        <GeneratedPassword params={params} password={password} />
+        <PasswordOptions setParams={setParams} setPassword={setPassword} />
+        <Credits openModal={setModal}/>
+        {
+          modal ?  <Modal closeModal={setModal} modalState={modal} /> : ""
+        }
       </div>
     </>
   );

@@ -1,32 +1,30 @@
 import React from "react";
 import { useState } from "react";
-import { Text, SvgContainer, Svg, Flex } from "../lib/styles";
-import Modal from "./Modal";
+import { SvgContainer, Svg, Flex } from "../lib/styles";
+import PropTypes from "prop-types";
 
-
-const margin = {
+const credits = {
   margin: "1rem 0 0 0",
-  cursor:"pointer"
+  cursor:"pointer",
+  background:"transparent",
+  border:"none",
+  width:"3rem",
 }
 
-const Credits = () => {
-  const [modal, setModal] = useState(false);
-  
-  const openModal = () => {
-    setModal(true);
-  };
-  
-  const closeModal = () => {
-    setModal(false);
-  };
+const Credits = ({openModal}) => {
   return (
     <Flex>
-      <SvgContainer onClick={()=>{openModal()}} style={margin}>
+      <button style={credits} onClick={()=>{openModal(true)}}>
         <Svg src="/assets/question-mark.svg" />
-      </SvgContainer>
-      <Modal isOpen={modal} Close={closeModal} Open={openModal} />
+      </button>
     </Flex>
   );
 };
+
+Credits.propTypes = {
+  openModal:PropTypes.func // set state function. Boolean value.
+}
+
+
 
 export default Credits;
